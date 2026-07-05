@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大謝名区 区域確認マップ</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    background: #f5f4f0;
+    color: #2c2c2a;
+  }
+
+  header {
+    background: #085041;
+    color: #fff;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  header h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  header p {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    margin-top: 2px;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #d3d1c7;
+  }
+
+  #map {
+    width: 100%;
+    height: 480px;
+  }
+
+  .map-footer {
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-top: 1px solid #e8e7e3;
+    background: #fafaf8;
+  }
+
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: #5f5e5a;
+  }
+
+  .legend-box {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    background: rgba(29,158,117,0.22);
+    border: 2px solid #0F6E56;
+    flex-shrink: 0;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: #888780;
+    margin-left: auto;
+  }
+
+  .note {
+    margin-top: 1rem;
+    background: #e1f5ee;
+    border-left: 3px solid #1D9E75;
+    border-radius: 0 8px 8px 0;
+    padding: 0.75rem 1rem;
+    font-size: 13px;
+    color: #085041;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    #map { height: 360px; }
+    header h1 { font-size: 1rem; }
+    .hint { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>大謝名区　区域確認マップ</h1>
+    <p>宜野湾市大謝名区自治会</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+    <div id="map"></div>
+    <div class="map-footer">
+      <div class="legend">
+        <div class="legend-box"></div>
+        大謝名区の区域
+      </div>
+      <span class="hint">拡大・縮小・スクロールができます</span>
+    </div>
+  </div>
+
+  <div class="note">
+    ※ 区域の境界はおおよその目安です。境界付近の場合は区の担当者にご確認ください。
+  </div>
+</div>
+
+<script>
+const map = L.map('map').setView([26.2667, 127.7360], 15);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19
+}).addTo(map);
+
+const geojson = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [127.7351988, 26.2692888],
+            [127.7331664, 26.2688274],
+            [127.7311339, 26.2683602],
+            [127.7309345, 26.268291],
+            [127.7313912, 26.2678527],
+            [127.7315391, 26.2675181],
+            [127.7318028, 26.2673336],
+            [127.7333626, 26.2669163],
+            [127.7334977, 26.2660613],
+            [127.7331148, 26.2656372],
+            [127.7330398, 26.2653612],
+            [127.7331974, 26.2652939],
+            [127.7340291, 26.2648428],
+            [127.7352452, 26.2639205],
+            [127.7358458, 26.2647957],
+            [127.7358834, 26.2649707],
+            [127.7360936, 26.2652737],
+            [127.7364314, 26.265065],
+            [127.7367917, 26.2650313],
+            [127.7369794, 26.265442],
+            [127.7372722, 26.2657247],
+            [127.7375424, 26.2658796],
+            [127.7383232, 26.266472],
+            [127.7390814, 26.2669904],
+            [127.7393592, 26.2673337],
+            [127.739727, 26.2680944],
+            [127.7394342, 26.2682964],
+            [127.739682, 26.268606],
+            [127.7393817, 26.268808],
+            [127.7391415, 26.2685589],
+            [127.7388862, 26.2686935],
+            [127.7385634, 26.2687743],
+            [127.7384433, 26.2688888],
+            [127.7380754, 26.268606],
+            [127.7378202, 26.2683704],
+            [127.7370695, 26.2687676],
+            [127.737137, 26.2688955],
+            [127.7362362, 26.2694408],
+            [127.7360035, 26.2694812],
+            [127.7351988, 26.2692888]
+          ]
+        ]
+      }
+    }
+  ]
+};
+
+const layer = L.geoJSON(geojson, {
+  style: {
+    color: '#0F6E56',
+    weight: 2.5,
+    fillColor: '#1D9E75',
+    fillOpacity: 0.22
+  }
+}).addTo(map);
+
+layer.bindPopup('<b>大謝名区</b><br>宜野湾市大謝名');
+
+map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+</script>
+
+</body>
+</html>

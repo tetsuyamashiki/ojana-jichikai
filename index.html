@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大謝名区自治会</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Noto Sans JP", sans-serif; font-weight: 300; color: #222; background: #fff; font-size: 16px; line-height: 1.9; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== INTRO OVERLAY ===== */
+    #intro-overlay {
+      position: fixed; inset: 0; background: #fff;
+      z-index: 9999;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.5rem;
+    }
+    .intro-moon {
+      width: 220px; height: 220px; object-fit: contain;
+      opacity: 0;
+      animation: moonAppear 1.5s cubic-bezier(0.34,1.2,0.64,1) 0.2s forwards;
+    }
+    @keyframes moonAppear {
+      0%   { opacity:0; transform:scale(0.3); }
+      60%  { opacity:1; transform:scale(1.08); }
+      100% { opacity:1; transform:scale(1); }
+    }
+    .intro-desc {
+      font-size: 1.4rem; color: #555; line-height: 2.2; text-align: center;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.9s ease 1.8s forwards;
+    }
+    .intro-wrap { display: flex; align-items: center; justify-content: center; gap: 1.2rem; }
+    .intro-chara {
+      width: 140px; height: 140px; object-fit: contain;
+      opacity: 0; transform: translateY(-30px) scale(0.85);
+      animation: charaDown 1s cubic-bezier(0.34,1.5,0.64,1) 4.3s forwards;
+    }
+    .intro-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300; letter-spacing: 0.12em; color: #222;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.9s ease 5.4s forwards;
+    }
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+    @keyframes charaDown { to { opacity:1; transform:translateY(0) scale(1); } }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      background: #f5c800; border-bottom: 1px solid #e8c800;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 60px;
+    }
+    .nav-left { display:flex; align-items:center; gap:1.2rem; }
+    .nav-logo { font-family:"Noto Serif JP",serif; font-size:1rem; font-weight:400; letter-spacing:0.1em; color:#111; cursor:pointer; transition:opacity 0.2s; }
+    .nav-logo:hover { opacity:0.6; }
+    .nav-sns { display:inline-flex; align-items:center; gap:0.35rem; font-size:0.72rem; color:#333; transition:color 0.2s; }
+    .nav-sns:hover { color:#111; }
+    .nav-links { display:flex; list-style:none; gap:2rem; }
+    .nav-links a { font-size:0.78rem; letter-spacing:0.08em; color:#333; transition:color 0.2s; }
+    .nav-links a:hover { color:#111; }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 100px 0 80px; }
+    section + section { border-top: 1px solid #e8e8e8; }
+    .inner { max-width:800px; margin:0 auto; padding:0 2rem; }
+    .sec-en { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#aaa; margin-bottom:0.5rem; }
+    .sec-jp { font-family:"Noto Serif JP",serif; font-size:1.6rem; font-weight:400; letter-spacing:0.1em; margin-bottom:3rem; color:#222; }
+
+    /* HOME */
+    #home { text-align:center; padding:160px 0 120px; position:relative; overflow:hidden; }
+    #home::before {
+      content:""; position:absolute; inset:0;
+      background-image: url("images/image11.JPG");
+      background-size:170%; background-position:62% 68%; opacity:0.55;
+      filter: brightness(1.25); z-index:0;
+    }
+    #home > * { position:relative; z-index:1; }
+    .home-sub { font-size:0.75rem; letter-spacing:0.2em; color:#333; font-weight:300; margin-bottom:2rem; }
+    .home-title-wrap { display:flex; align-items:center; justify-content:center; gap:1.2rem; margin-bottom:2rem; }
+    .home-chara { width:140px; height:140px; object-fit:contain; flex-shrink:0; }
+    .home-title { font-family:"Noto Serif JP",serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:300; letter-spacing:0.12em; line-height:1.6; color:#222; }
+    .home-desc { font-size:0.9rem; color:#333; line-height:2.2; max-width:480px; margin:0 auto; }
+
+    /* FADE IN */
+    .fade-in { opacity:0; transform:translateY(24px); transition:opacity 0.8s ease, transform 0.8s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* EVENTS */
+    #events { position:relative; overflow:hidden; }
+    #events::before {
+      content:""; position:absolute; inset:0;
+      background-image: url("images/image2.jpg") /* ここに巨大な画像データが入っていました */;
+      background-repeat:no-repeat; background-position:center; background-size:80%;
+      opacity:0; z-index:0;
+      transition: opacity 1s ease, transform 0.1s linear;
+      transform: translateY(var(--parallax-y,0));
+    }
+    #events.bg-visible::before { opacity:0.15; }
+    #events .inner { position:relative; z-index:1; }
+    .events-title-bg { margin-bottom:2rem; }
+    .event-list { display:flex; flex-direction:column; }
+    .event-row { display:grid; grid-template-columns:90px 1fr; gap:2rem; align-items:start; padding:2rem 0; border-bottom:1px solid #efefef; }
+    .event-row:first-child { border-top:1px solid #efefef; }
+    .e-date { text-align:center; }
+    .e-month { font-size:0.65rem; letter-spacing:0.1em; color:#aaa; display:block; }
+    .e-day { font-family:"Noto Serif JP",serif; font-size:2.5rem; font-weight:300; line-height:1; color:#222; display:block; }
+    .e-name { font-size:1rem; font-weight:500; letter-spacing:0.05em; margin-bottom:0.3rem; }
+    .e-detail { font-size:0.8rem; color:#999; }
+    .e-flyer { margin-top:1.2rem; cursor:pointer; display:inline-block; }
+    .e-flyer img { max-width:260px; width:100%; border:1px solid #efefef; display:block; }
+    .e-flyer-note { font-size:0.7rem; color:#aaa; margin-top:0.4rem; }
+
+    /* MANGA */
+    #manga { background:#f5c800; }
+    .manga-wrap { text-align:center; }
+    .manga-label { font-size:0.72rem; letter-spacing:0.15em; color:#555; margin-bottom:1.5rem; }
+    .manga-img { max-width:420px; width:100%; border:1px solid #e0b800; opacity:0; transform:translateY(40px) scale(0.92); transition:opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+    .manga-img.pop { opacity:1; transform:translateY(0) scale(1); }
+    .manga-caption { font-size:0.78rem; color:#555; margin-top:1rem; }
+
+    /* ORGS */
+    .orgs-group { margin-bottom:2.5rem; }
+    .orgs-group-label { font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:#aaa; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid #efefef; }
+    .orgs-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; align-items:stretch; }
+    .org-item { display:flex; flex-direction:column; padding:1.2rem; border:1px solid #efefef; }
+    .org-name { font-family:"Noto Serif JP",serif; font-size:0.95rem; font-weight:400; margin-bottom:0.4rem; }
+    .org-desc { font-size:0.75rem; color:#999; line-height:1.7; }
+    .org-sns { display:inline-flex; align-items:center; gap:0.35rem; font-size:0.72rem; color:#aaa; margin-top:0.6rem; border-bottom:1px solid #ddd; padding-bottom:0.1rem; transition:color 0.2s,border-color 0.2s; }
+    .org-sns:hover { color:#222; border-color:#222; }
+
+    /* LIFE */
+    .life-rows { display:flex; flex-direction:column; }
+    .life-row { display:grid; grid-template-columns:130px 1fr; gap:2rem; padding:1.4rem 0; border-bottom:1px solid #efefef; align-items:baseline; }
+    .life-row:first-child { border-top:1px solid #efefef; }
+    .l-label { font-size:0.78rem; color:#222; font-weight:400; }
+    .l-text { font-size:0.9rem; color:#333; line-height:1.8; }
+    .officer-rows { display:flex; flex-direction:column; }
+    .officer-row { display:grid; grid-template-columns:130px 1fr; gap:2rem; padding:1.2rem 0; border-bottom:1px solid #efefef; align-items:baseline; }
+    .officer-row:first-child { border-top:1px solid #efefef; }
+    .o-role { font-size:0.8rem; color:#222; }
+    .o-name { font-size:0.95rem; font-weight:400; }
+
+    /* CONTACT */
+    #contact { background:#f5c800; }
+    #contact .inner { text-align:center; }
+    .contact-block { margin-bottom:2rem; }
+    .contact-label { font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:#555; margin-bottom:0.5rem; }
+    .contact-val { font-family:"Noto Serif JP",serif; font-size:1.3rem; font-weight:300; letter-spacing:0.08em; }
+    .contact-note { font-size:0.78rem; color:#555; margin-top:0.3rem; }
+    .contact-btn { display:inline-block; border:1px solid #222; padding:0.7rem 2.5rem; font-size:0.8rem; letter-spacing:0.12em; color:#222; margin-top:2rem; transition:background 0.2s,color 0.2s; }
+    .contact-btn:hover { background:#222; color:#fff; }
+    .sns-links { display:flex; justify-content:center; gap:1.2rem; margin-top:2rem; }
+    .sns-btn { display:inline-flex; align-items:center; gap:0.5rem; border:1px solid #999; padding:0.6rem 1.5rem; font-size:0.8rem; color:#333; transition:border-color 0.2s,color 0.2s; }
+    .sns-btn:hover { border-color:#222; color:#222; }
+
+    /* LIGHTBOX */
+    .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9000; align-items:center; justify-content:center; padding:2rem; }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:90vw; max-height:90vh; object-fit:contain; }
+    .lightbox-close { position:absolute; top:1.2rem; right:1.5rem; color:white; font-size:2rem; cursor:pointer; }
+
+    /* FOOTER */
+    footer { border-top:1px solid #e8e8e8; padding:2.5rem; text-align:center; }
+    footer p { font-size:0.72rem; color:#bbb; letter-spacing:0.08em; }
+
+    @media (max-width:640px) {
+      nav { padding:0 0.8rem; height:auto; flex-wrap:wrap; gap:0.4rem; padding-top:0.5rem; padding-bottom:0.5rem; }
+      .nav-left { gap:0.6rem; }
+      .nav-logo { font-size:0.85rem; }
+      .nav-sns { display:none; }
+      .nav-links { gap:0.5rem; flex-wrap:wrap; justify-content:flex-end; }
+      .nav-links a { font-size:0.65rem; }
+      #home { padding-top:120px; }
+      .orgs-grid { grid-template-columns:repeat(2,1fr); }
+      .event-row { grid-template-columns:70px 1fr; gap:1rem; }
+      .life-row,.officer-row { grid-template-columns:1fr; gap:0.3rem; }
+      .home-chara { width:80px; height:80px; }
+    }
+
+    #skip-btn {
+      position: fixed;
+      top: 1.5rem;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: fit-content;
+      z-index: 10000;
+      background: transparent;
+      border: 1px solid #aaa;
+      color: #aaa;
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1s forwards;
+    }
+    #skip-btn:hover { border-color: #222; color: #222; }
+  </style>
+</head>
+<body>
+
+<!-- INTRO OVERLAY（前面に乗るだけ・ページ本体は常に存在） -->
+<div id="intro-overlay">
+  <img class="intro-moon" src="images/image3.png" alt="月"><!-- ここに巨大な画像データが入っていました -->
+  <p class="intro-desc">大謝名アイデンティティ、アップデート中…</p>
+  <div class="intro-wrap">
+    <img class="intro-chara" src="images/image4.5.png" alt="大謝名キャラクター">
+    <p class="intro-title">大謝名区自治会</p>
+  </div>
+</div>
+<button id="skip-btn" onclick="skipIntro()">SKIP ›</button>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="#home" class="nav-logo">大謝名区自治会</a>
+    <a href="https://www.instagram.com/ojana_jichikai_okinawa/" target="_blank" class="nav-sns">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <a href="https://note.com/oojyana" target="_blank" class="nav-sns">
+      <svg width="16" height="16" viewBox="0 0 24 24"><text x="2" y="17" font-size="16" font-family="Georgia,serif" font-weight="bold" fill="currentColor">n</text></svg>
+      note
+    </a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#events">行事</a></li>
+    <li><a href="#manga">4コマ</a></li>
+    <li><a href="#orgs">組織</a></li>
+    <li><a href="#life">生活情報</a></li>
+<li><a href="#contact">連絡先</a></li>
+  </ul>
+</nav>
+
+<!-- メインページ（常に表示・オーバーレイが上に乗るだけ） -->
+<section id="home">
+  <div class="inner">
+    <p class="home-sub">沖縄県宜野湾市大謝名</p>
+    <div class="home-title-wrap">
+      <img class="home-chara" src="images/image4.5.png" alt="大謝名キャラクター">
+      <h1 class="home-title">大謝名区自治会</h1>
+    </div>
+    <p class="home-desc">大謝名アイデンティティ、アップデート中…</p>
+  </div>
+</section>
+
+<section id="events" class="fade-in">
+  <div class="inner">
+    <div class="events-title-bg">
+      <p class="sec-en">Events</p>
+      <h2 class="sec-jp">行事・イベント</h2>
+    </div>
+    <div class="event-list">
+
+      <div class="event-row">
+        <div class="e-date"><span class="e-month">2月</span><span class="e-day">22</span></div>
+        <div class="e-info">
+          <p class="e-name">フリーマーケット</p>
+          <p class="e-detail">大謝名公民館　13:00〜17:00　先着100名・キャラメルポップコーン無料</p>
+          <div class="e-flyer" onclick="openLightbox(event)">
+            <img src="images/image6.jpg" alt="フリーマーケットチラシ"><!-- ここに巨大な画像データが入っていました -->
+            <p class="e-flyer-note">↑ クリックで拡大</p>
+          </div>
+        </div>
+      </div>
+      <div class="event-row">
+        <div class="e-date"><span class="e-month">3月</span><span class="e-day">24</span></div>
+        <div class="e-info"><p class="e-name">映画上映会</p><p class="e-detail">大謝名公民館</p></div>
+      </div>
+      <div class="event-row">
+        <div class="e-date"><span class="e-month">3月</span><span class="e-day">28</span></div>
+        <div class="e-info">
+          <p class="e-name">ススキ×ほうき もの作りWS</p>
+          <p class="e-detail">大謝名公民館　10:00〜12:00　参加費無料・定員15組</p>
+          <div class="e-flyer" onclick="openLightbox(event)">
+            <img src="images/image7.jpg" alt="ワークショップチラシ"><!-- ここに巨大な画像データが入っていました -->
+            <p class="e-flyer-note">↑ クリックで拡大</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-row">
+        <div class="e-date"><span class="e-month">4月</span><span class="e-day">15</span></div>
+        <div class="e-info"><p class="e-name">定期総会</p><p class="e-detail">大謝名公民館　19:00〜21:00</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="manga" class="fade-in">
+  <div class="inner">
+    <p class="sec-en">4-Koma Manga</p>
+    <h2 class="sec-jp">4コマ漫画</h2>
+    <div class="manga-wrap">
+      <p class="manga-label">2026年3月号 ─ 自治会だより掲載</p>
+      <img class="manga-img" src="images/image8.jpg" alt="4コマ漫画"><!-- ここに巨大な画像データが入っていました -->
+      <p class="manga-caption">「先生は、交代制」</p>
+    </div>
+  </div>
+</section>
+
+<section id="orgs" class="fade-in" style="position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:0; pointer-events:none;">
+    <img src="images/image9.gif" alt="" style="width:80%; max-width:600px; height:auto; opacity:0.12;"><!-- ここに巨大な画像データが入っていました -->
+  </div>
+  <div class="inner" style="position:relative; z-index:1;">
+    <p class="sec-en">Organization</p>
+    <h2 class="sec-jp">関連組織</h2>
+    <div class="orgs-group">
+      <p class="orgs-group-label">下部組織</p>
+      <div class="orgs-grid">
+        <div class="org-item" style="background:#f5c800;">
+          <p class="org-name">青年会</p>
+          <p class="org-desc">地域の若者が行事や奉仕活動を行います。</p>
+          <a href="https://www.instagram.com/ojana.1234/" target="_blank" class="org-sns">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            Instagram
+          </a>
+        </div>
+        <div class="org-item"><p class="org-name">子ども会</p><p class="org-desc">子どもたちの健全育成と地域交流を支援します。</p></div>
+        <div class="org-item" style="background:#f5c800;"><p class="org-name">老人会</p><p class="org-desc">高齢者の親睦と健康促進を目的に活動します。</p></div>
+        <div class="org-item"><p class="org-name">婦人会</p><p class="org-desc">女性が中心となり文化・福祉活動を行います。</p></div>
+      </div>
+    </div>
+    <div class="orgs-group">
+      <p class="orgs-group-label">並列組織</p>
+      <div class="orgs-grid">
+        <div class="org-item" style="background:#f5c800;"><p class="org-name">大謝名獅子舞保存会</p><p class="org-desc">大謝名区に伝わる伝統の獅子舞を継承・保存する団体です。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="life" class="fade-in" style="background:#f5c800;">
+  <div class="inner">
+    <p class="sec-en">Life Information</p>
+    <h2 class="sec-jp">生活情報</h2>
+    <div class="life-rows">
+      <div class="life-row">
+        <span class="l-label">ゴミ収集日</span>
+        <span class="l-text"><a href="https://www.city.ginowan.lg.jp/material/files/group/15/gomi_calendar_2026-4.pdf" target="_blank" style="display:inline-block;margin-top:0.5rem;font-size:0.78rem;color:#222;border:1px solid #aaa;padding:0.3rem 0.8rem;letter-spacing:0.05em;">📄 ゴミカレンダーを見る →</a></span>
+      </div>
+      <div class="life-row"><span class="l-label">防災・緊急連絡</span><span class="l-text">台風・災害時は自治会の緊急連絡網をご確認ください。<br>警察：110　／　消防・救急：119</span></div>
+      <div class="life-row"><span class="l-label">水道・公共設備</span><span class="l-text">漏水・道路の不具合は宜野湾市役所（098-893-4411）へ</span></div>
+      <div class="life-row"><span class="l-label">環境・美化活動</span><span class="l-text">毎月最終日曜日に地域清掃を実施しています</span></div>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <p class="sec-en" style="margin-bottom:1rem;">Officers</p>
+      <div class="officer-rows">
+        <div class="officer-row"><span class="o-role">自治会長</span><span class="o-name">眞志喜 初枝</span></div>
+        <div class="officer-row"><span class="o-role">書記</span><span class="o-name">天久 真太郎</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="join" class="fade-in">
+  <div class="inner">
+    <p class="sec-en">Join Us</p>
+    <h2 class="sec-jp">自治会加入のご案内</h2>
+    <div style="text-align:center;">
+      <img src="images/image10.jpg" alt="大謝名区自治会加入促進ポスター" style="max-width:100%;width:100%;border:1px solid #efefef;"><!-- ここに巨大な画像データが入っていました -->
+      <a href="ojajna_map.html" target="_blank" class="contact-btn" style="margin-top:2.5rem;">自治会範囲マップを見る →</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="fade-in">
+  <div class="inner">
+    <p class="sec-en">Contact</p>
+    <h2 class="sec-jp">連絡先</h2>
+    <div class="contact-block">
+      <p class="contact-label">Tel</p>
+      <p class="contact-val">098-897-2900</p>
+      <p class="contact-note">受付時間：平日 9:00〜17:00</p>
+    </div>
+    <div class="contact-block">
+      <p class="contact-label">Email</p>
+      <p class="contact-val" style="font-size:1rem;" id="mail-addr"></p>
+    </div>
+    <a id="mail-btn" class="contact-btn">メールで問い合わせ</a>
+    <div class="sns-links">
+      <a href="https://www.instagram.com/ojana_jichikai_okinawa/" target="_blank" class="sns-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        Instagram
+      </a>
+      <a href="https://note.com/oojyana" target="_blank" class="sns-btn">
+        <svg width="18" height="16" viewBox="0 0 24 24"><text x="2" y="17" font-size="16" font-family="Georgia,serif" font-weight="bold" fill="currentColor">n</text></svg>
+        note
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 大謝名区自治会　All Rights Reserved.</p>
+</footer>
+
+<script>
+(function() {
+
+  // スキップ関数
+  window.skipIntro = function() {
+    var overlay = document.getElementById('intro-overlay');
+    var skipBtn = document.getElementById('skip-btn');
+    overlay.style.transition = 'opacity 0.5s ease';
+    overlay.style.opacity = '0';
+    if (skipBtn) skipBtn.style.display = 'none';
+    setTimeout(function() {
+      overlay.style.display = 'none';
+    }, 500);
+  };
+
+  // オーバーレイ終了時にスキップボタンも非表示
+  setTimeout(function() {
+    var skipBtn = document.getElementById('skip-btn');
+    if (skipBtn) skipBtn.style.display = 'none';
+  }, 7500);
+
+  // メールアドレス（Cloudflare対策）
+  var m = 'oojyanajichi' + '@' + 'yahoo.co.jp';
+  var ad = document.getElementById('mail-addr');
+  var btn = document.getElementById('mail-btn');
+  if (ad) ad.textContent = m;
+  if (btn) btn.href = 'mailto:' + m;
+
+  // イントロオーバーレイ：7秒後にdisplay:noneにするだけ
+  var overlay = document.getElementById('intro-overlay');
+  setTimeout(function() {
+    overlay.style.transition = 'opacity 1s ease';
+    overlay.style.opacity = '0';
+    setTimeout(function() {
+      overlay.style.display = 'none';
+    }, 1000);
+  }, 7500);
+
+  // フェードイン
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+
+  // 4コマぴょこっと
+  var mImg = document.querySelector('.manga-img');
+  if (mImg) {
+    var mObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          setTimeout(function() { mImg.classList.add('pop'); }, 150);
+          mObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    mObs.observe(mImg);
+  }
+
+  // 行事背景
+  var ev = document.getElementById('events');
+  if (ev) {
+    new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        ev.classList.toggle('bg-visible', e.isIntersecting);
+      });
+    }, { threshold: 0.15 }).observe(ev);
+  }
+
+  // パララックス
+  window.addEventListener('scroll', function() {
+    var ev = document.getElementById('events');
+    if (ev) ev.style.setProperty('--parallax-y', (ev.getBoundingClientRect().top * 0.15) + 'px');
+  });
+
+  // ライトボックス
+  window.openLightbox = function(e) {
+    e.stopPropagation();
+    document.getElementById('lightbox-img').src = e.currentTarget.querySelector('img').src;
+    document.getElementById('lightbox').classList.add('open');
+  };
+  window.closeLightbox = function() {
+    document.getElementById('lightbox').classList.remove('open');
+  };
+
+})();
+</script>
+
+</body>
+</html>
