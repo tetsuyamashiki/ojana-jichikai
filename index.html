@@ -220,6 +220,11 @@
       .life-row,.officer-row { grid-template-columns:1fr; gap:0.3rem; }
     }
 
+    /* iPadなど縦向きタブレット：ヒーロー写真の被写体位置調整（女性の顔を避ける） */
+    @media (min-width:641px) and (max-width:1024px) and (orientation:portrait) {
+      #home::before { background-size:200%; background-position:60% 38%; }
+    }
+
     #skip-btn {
       position: fixed;
       top: 1.5rem;
@@ -385,7 +390,7 @@
     <div class="orgs-group">
       <p class="orgs-group-label">下部組織</p>
       <div class="orgs-grid">
-        <div class="org-item" style="background:#f5c800;">
+        <div class="org-item">
           <p class="org-name">青年会</p>
           <p class="org-desc">地域の若者が行事や奉仕活動を行います。</p>
           <a href="https://www.instagram.com/ojana.1234/" target="_blank" class="org-sns">
@@ -394,14 +399,14 @@
           </a>
         </div>
         <div class="org-item"><p class="org-name">子ども会</p><p class="org-desc">子どもたちの健全育成と地域交流を支援します。</p></div>
-        <div class="org-item" style="background:#f5c800;"><p class="org-name">老人会</p><p class="org-desc">高齢者の親睦と健康促進を目的に活動します。</p></div>
+        <div class="org-item"><p class="org-name">老人会</p><p class="org-desc">高齢者の親睦と健康促進を目的に活動します。</p></div>
         <div class="org-item"><p class="org-name">婦人会</p><p class="org-desc">女性が中心となり文化・福祉活動を行います。</p></div>
       </div>
     </div>
     <div class="orgs-group">
       <p class="orgs-group-label">並列組織</p>
       <div class="orgs-grid">
-        <div class="org-item" style="background:#f5c800;"><p class="org-name">大謝名獅子舞保存会</p><p class="org-desc">大謝名区に伝わる伝統の獅子舞を継承・保存する団体です。</p></div>
+        <div class="org-item"><p class="org-name">大謝名獅子舞保存会</p><p class="org-desc">大謝名区に伝わる伝統の獅子舞を継承・保存する団体です。</p></div>
       </div>
     </div>
   </div>
@@ -435,7 +440,10 @@
     <p class="sec-en">Join Us</p>
     <h2 class="sec-jp">自治会加入のご案内</h2>
     <div style="text-align:center;">
-      <img src="images/image10.jpg" alt="大謝名区自治会加入促進ポスター" style="max-width:100%;width:100%;border:1px solid #efefef;"><!-- ここに巨大な画像データが入っていました -->
+      <div style="cursor:pointer;" onclick="openLightbox(event)">
+        <img src="images/image10.jpg" alt="大謝名区自治会加入促進ポスター" style="max-width:100%;width:100%;border:1px solid #efefef;display:block;"><!-- ここに巨大な画像データが入っていました -->
+      </div>
+      <p class="e-flyer-note">↑ クリックで拡大</p>
       <a href="ojajna_map.html" target="_blank" class="contact-btn" style="margin-top:2.5rem;">自治会範囲マップを見る →</a>
     </div>
   </div>
