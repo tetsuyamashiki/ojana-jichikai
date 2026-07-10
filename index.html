@@ -50,40 +50,45 @@
     .intro-moon {
       width: 220px; height: 220px; object-fit: contain;
       opacity: 0;
-      animation: moonAppear 1.5s cubic-bezier(0.34,1.2,0.64,1) 0.2s forwards;
+      animation: moonAppearFade 2.4s cubic-bezier(0.4,0.2,0.4,1) 0.2s forwards;
     }
-    @keyframes moonAppear {
-      0%   { opacity:0; transform:scale(0.3); }
-      60%  { opacity:1; transform:scale(1.08); }
-      100% { opacity:1; transform:scale(1); }
+    @keyframes moonAppearFade {
+      0%     { opacity:0; transform:scale(0.3); }
+      37.5%  { opacity:1; transform:scale(1.08); }
+      62.5%  { opacity:1; transform:scale(1); }
+      75%    { opacity:1; transform:scale(1); }
+      100%   { opacity:0; transform:scale(0.85); }
     }
-    .intro-photos { display:flex; gap:0.7rem; }
+    .intro-photos {
+      display:flex; gap:0.6rem;
+      width:min(90vw, 640px); height:38vh; max-height:420px;
+    }
     .intro-photo {
-      width: 72px; height: 112px; object-fit: cover; display:block;
-      opacity: 0; transform: translateY(-40px);
-      animation: introPhotoSlide 0.7s cubic-bezier(0.34,1.4,0.64,1) forwards;
+      height: 100%; object-fit: cover; display:block;
+      opacity: 0; transform: translateY(-60px);
+      animation: introPhotoSlide 0.8s cubic-bezier(0.34,1.4,0.64,1) forwards;
     }
-    .intro-photo:nth-child(1) { animation-delay: 1.9s; object-position:60% 45%; }
-    .intro-photo:nth-child(2) { animation-delay: 2.0s; object-position:45% 55%; }
-    .intro-photo:nth-child(3) { animation-delay: 2.1s; object-position:50% 40%; }
+    .intro-photo:nth-child(1) { flex:1.3; animation-delay: 2.7s; object-position:50% 35%; }
+    .intro-photo:nth-child(2) { flex:2.3; animation-delay: 2.82s; object-position:50% 50%; }
+    .intro-photo:nth-child(3) { flex:1;   animation-delay: 2.94s; object-position:50% 30%; }
     @keyframes introPhotoSlide { to { opacity:1; transform:translateY(0); } }
     .intro-desc {
       font-size: 1.4rem; color: #555; line-height: 2.2; text-align: center;
       opacity: 0; transform: translateY(16px);
-      animation: fadeUp 0.9s ease 3.0s forwards;
+      animation: fadeUp 0.9s ease 4.0s forwards;
     }
     .intro-wrap { display: flex; align-items: center; justify-content: center; gap: 1.2rem; }
     .intro-chara {
       width: 140px; height: 140px; object-fit: contain;
       opacity: 0; transform: translateY(-30px) scale(0.85);
-      animation: charaDown 1s cubic-bezier(0.34,1.5,0.64,1) 4.4s forwards;
+      animation: charaDown 1s cubic-bezier(0.34,1.5,0.64,1) 5.3s forwards;
     }
     .intro-title {
       font-family: "Noto Serif JP", serif;
       font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 300; letter-spacing: 0.12em; color: #222;
       opacity: 0; transform: translateY(16px);
-      animation: fadeUp 0.9s ease 5.5s forwards;
+      animation: fadeUp 0.9s ease 6.4s forwards;
     }
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
     @keyframes charaDown { to { opacity:1; transform:translateY(0) scale(1); } }
@@ -122,11 +127,14 @@
     #home > * { position:relative; z-index:1; }
     #home > .home-photos { position:absolute; inset:0; z-index:0; }
     .home-photos { display:flex; }
-    .home-photo { flex:1; overflow:hidden; }
+    .home-photo { overflow:hidden; }
     .home-photo img { width:100%; height:100%; object-fit:cover; display:block; opacity:0.55; filter:brightness(1.25); }
-    .home-photo:nth-child(1) img { object-position:60% 45%; }
-    .home-photo:nth-child(2) img { object-position:45% 55%; }
-    .home-photo:nth-child(3) img { object-position:50% 40%; }
+    .home-photo:nth-child(1) { flex:1.3; }
+    .home-photo:nth-child(2) { flex:2.3; }
+    .home-photo:nth-child(3) { flex:1; }
+    .home-photo:nth-child(1) img { object-position:50% 35%; }
+    .home-photo:nth-child(2) img { object-position:50% 50%; }
+    .home-photo:nth-child(3) img { object-position:50% 30%; }
     .home-sub { font-size:0.75rem; letter-spacing:0.2em; color:#333; font-weight:300; margin-bottom:2rem; }
     .home-title-wrap { display:flex; align-items:center; justify-content:center; gap:1.2rem; margin-bottom:2rem; }
     .home-chara { width:140px; height:140px; object-fit:contain; flex-shrink:0; }
@@ -266,9 +274,9 @@
 <div id="intro-overlay">
   <img class="intro-moon" src="images/image3.png" alt="月"><!-- ここに巨大な画像データが入っていました -->
   <div class="intro-photos">
-    <img class="intro-photo" src="images/image11.JPG" alt="祭りの様子1">
-    <img class="intro-photo" src="images/image12.JPG" alt="祭りの様子2">
-    <img class="intro-photo" src="images/image13.JPG" alt="祭りの様子3">
+    <img class="intro-photo" src="images/hero-boy.jpg" alt="祭りの様子1">
+    <img class="intro-photo" src="images/hero-shishimai.jpg" alt="祭りの様子2">
+    <img class="intro-photo" src="images/hero-seinenkai.jpg" alt="祭りの様子3">
   </div>
   <p class="intro-desc">大謝名アイデンティティ、アップデート中…</p>
   <div class="intro-wrap">
@@ -310,9 +318,9 @@
 <!-- メインページ（常に表示・オーバーレイが上に乗るだけ） -->
 <section id="home">
   <div class="home-photos">
-    <div class="home-photo"><img src="images/image11.JPG" alt="大謝名の祭りの様子1"></div>
-    <div class="home-photo"><img src="images/image12.JPG" alt="大謝名獅子舞保存会の獅子舞"></div>
-    <div class="home-photo"><img src="images/image13.JPG" alt="大謝名青年会の演舞"></div>
+    <div class="home-photo"><img src="images/hero-boy.jpg" alt="大謝名の祭りの様子"></div>
+    <div class="home-photo"><img src="images/hero-shishimai.jpg" alt="大謝名獅子舞保存会の獅子舞"></div>
+    <div class="home-photo"><img src="images/hero-seinenkai.jpg" alt="大謝名青年会の演舞"></div>
   </div>
   <div class="inner">
     <p class="home-sub">沖縄県宜野湾市大謝名</p>
@@ -521,7 +529,7 @@
   setTimeout(function() {
     var skipBtn = document.getElementById('skip-btn');
     if (skipBtn) skipBtn.style.display = 'none';
-  }, 8500);
+  }, 9000);
 
   // メールアドレス（Cloudflare対策）
   var m = 'oojyanajichi' + '@' + 'yahoo.co.jp';
@@ -538,7 +546,7 @@
     setTimeout(function() {
       overlay.style.display = 'none';
     }, 1000);
-  }, 8500);
+  }, 9000);
 
   // フェードイン
   var obs = new IntersectionObserver(function(entries) {
