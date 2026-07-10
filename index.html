@@ -64,6 +64,7 @@
     .intro-photos {
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
       width:min(92vw, 820px); height:60vh; max-height:600px;
+      overflow:hidden;
     }
     .intro-photo {
       position:absolute; inset:0;
@@ -84,30 +85,35 @@
       100% { opacity:1; transform:scale(2.4); }
     }
     .intro-desc {
-      position:absolute; left:50%; bottom:23vh;
+      position:absolute; left:50%; bottom:5vh;
       width:90%; max-width:520px;
       font-size: 1.4rem; color: #555; line-height: 2.2; text-align: center;
       text-shadow: 0 0 10px rgba(255,255,255,0.9), 0 0 10px rgba(255,255,255,0.9);
       opacity: 0; transform: translate(-50%,16px);
-      animation: descFadeIn 0.9s ease 0.5s forwards;
+      animation: descFadeInOut 3.3s ease 0.5s forwards;
     }
-    @keyframes descFadeIn { to { opacity:1; transform:translate(-50%,0); } }
+    @keyframes descFadeInOut {
+      0%   { opacity:0; transform:translate(-50%,16px); }
+      15%  { opacity:1; transform:translate(-50%,0); }
+      85%  { opacity:1; transform:translate(-50%,0); }
+      100% { opacity:0; transform:translate(-50%,-10px); }
+    }
     .intro-wrap {
-      position:absolute; left:50%; bottom:7vh; transform:translateX(-50%);
+      position:absolute; left:50%; bottom:5vh; transform:translateX(-50%);
       display: flex; align-items: center; justify-content: center; gap: 1.2rem;
       width:max-content; max-width:90vw;
     }
     .intro-chara {
       width: 140px; height: 140px; object-fit: contain;
       opacity: 0; transform: translateY(-30px) scale(0.85);
-      animation: charaDown 1s cubic-bezier(0.34,1.5,0.64,1) 2.3s forwards;
+      animation: charaDown 1s cubic-bezier(0.34,1.5,0.64,1) 4.0s forwards;
     }
     .intro-title {
       font-family: "Noto Serif JP", serif;
       font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 300; letter-spacing: 0.12em; color: #222;
       opacity: 0; transform: translateY(16px);
-      animation: fadeUp 0.9s ease 2.35s forwards;
+      animation: fadeUp 0.9s ease 4.05s forwards;
     }
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
     @keyframes charaDown { to { opacity:1; transform:translateY(0) scale(1); } }
@@ -247,8 +253,8 @@
       #intro-overlay { gap:0.8rem; padding:1rem 0; }
       .intro-moon { width:120px; height:120px; }
       .intro-photos { width:94vw; height:38vh; max-height:340px; }
-      .intro-desc { font-size:1.1rem; line-height:1.8; bottom:26vh; }
-      .intro-wrap { bottom:8vh; }
+      .intro-desc { font-size:1.1rem; line-height:1.8; bottom:4vh; }
+      .intro-wrap { bottom:4vh; }
       .intro-chara { width:80px; height:80px; }
       .intro-title { font-size:1.6rem; }
       nav { padding:0 0.8rem; height:auto; flex-wrap:wrap; gap:0.4rem; padding-top:0.5rem; padding-bottom:0.5rem; }
