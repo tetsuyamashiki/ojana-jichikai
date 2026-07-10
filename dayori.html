@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自治会だより バックナンバー｜大謝名区自治会</title>
+  <meta name="description" content="大謝名区自治会「自治会だより」のバックナンバー一覧。">
+  <link rel="canonical" href="https://tetsuyamashiki.github.io/ojana-jichikai/dayori.html">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Noto Sans JP", sans-serif; font-weight: 300; color: #222; background: #fff; font-size: 16px; line-height: 1.9; }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: sticky; top:0; left:0; right:0; z-index:100;
+      background: #f5c800; border-bottom: 1px solid #e8c800;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 60px;
+    }
+    .nav-logo { font-family:"Noto Serif JP",serif; font-size:1rem; font-weight:400; letter-spacing:0.1em; color:#111; transition:opacity 0.2s; }
+    .nav-logo:hover { opacity:0.6; }
+    .nav-back { font-size:0.78rem; letter-spacing:0.08em; color:#333; }
+
+    .inner { max-width:800px; margin:0 auto; padding:0 2rem; }
+    .page-head { padding:100px 0 60px; text-align:center; }
+    .sec-en { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#aaa; margin-bottom:0.5rem; }
+    .sec-jp { font-family:"Noto Serif JP",serif; font-size:1.6rem; font-weight:400; letter-spacing:0.1em; color:#222; }
+
+    .year-block { padding:0 0 80px; }
+    .year-title { font-family:"Noto Serif JP",serif; font-size:1.1rem; font-weight:400; letter-spacing:0.08em; color:#222; margin-bottom:1.5rem; padding-bottom:0.6rem; border-bottom:1px solid #e8e8e8; }
+    .year-note { font-size:0.8rem; color:#aaa; margin-bottom:1.5rem; }
+
+    .issue-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+    .issue-item { text-align:center; }
+    .issue-thumb { display:block; cursor:pointer; border:1px solid #efefef; overflow:hidden; }
+    .issue-thumb img { width:100%; display:block; transition:transform 0.3s ease; }
+    .issue-thumb:hover img { transform:scale(1.04); }
+    .issue-label { font-size:0.75rem; color:#555; margin-top:0.6rem; letter-spacing:0.05em; }
+
+    .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9000; align-items:center; justify-content:center; padding:2rem; }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width:90vw; max-height:90vh; object-fit:contain; }
+    .lightbox-close { position:absolute; top:1.2rem; right:1.5rem; color:white; font-size:2rem; cursor:pointer; }
+
+    footer { border-top:1px solid #e8e8e8; padding:2.5rem; text-align:center; }
+    footer p { font-size:0.72rem; color:#bbb; letter-spacing:0.08em; }
+
+    @media (max-width:640px) {
+      nav { padding:0 1rem; }
+      .issue-grid { grid-template-columns:repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">大謝名区自治会</a>
+  <a href="index.html#dayori" class="nav-back">← トップへ戻る</a>
+</nav>
+
+<div class="page-head">
+  <p class="sec-en">Newsletter Archive</p>
+  <h1 class="sec-jp">自治会だより バックナンバー</h1>
+</div>
+
+<div class="inner">
+
+  <div class="year-block">
+    <p class="year-title">令和8年度</p>
+    <div class="issue-grid">
+      <div class="issue-item">
+        <a class="issue-thumb" href="images/dayori/2026-07-1.jpg" onclick="return openLightbox(event)">
+          <img src="images/dayori/2026-07-1.jpg" alt="自治会だより2026年7月号">
+        </a>
+        <p class="issue-label">7月号</p>
+      </div>
+    </div>
+    <p class="year-note" style="margin-top:1.5rem;">4〜6月号・8月号は準備中です。順次追加していきます。</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 大謝名区自治会　All Rights Reserved.</p>
+</footer>
+
+<script>
+  window.openLightbox = function(e) {
+    e.preventDefault();
+    document.getElementById('lightbox-img').src = e.currentTarget.querySelector('img').src;
+    document.getElementById('lightbox').classList.add('open');
+    return false;
+  };
+  window.closeLightbox = function() {
+    document.getElementById('lightbox').classList.remove('open');
+  };
+</script>
+
+</body>
+</html>
