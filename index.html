@@ -72,22 +72,26 @@
     }
     .intro-photo:nth-child(1) { animation: introPhotoFadeInOut 1.2s ease-in-out 2.3s forwards; }
     .intro-photo:nth-child(2) { animation: introPhotoFadeInOut 1.2s ease-in-out 3.4s forwards; }
-    .intro-photo:nth-child(3) { animation: introPhotoFadeIn 0.5s ease 4.5s forwards; }
+    .intro-photo:nth-child(3) {
+      transform-origin: 61% 55%;
+      animation: introPhotoZoomIn 4s ease-out 4.5s forwards;
+    }
     @keyframes introPhotoFadeInOut { 0% { opacity:0; } 20% { opacity:1; } 80% { opacity:1; } 100% { opacity:0; } }
     @keyframes introPhotoFadeIn { to { opacity:1; } }
+    @keyframes introPhotoZoomIn {
+      0%   { opacity:0; transform:scale(1); }
+      15%  { opacity:1; transform:scale(1); }
+      100% { opacity:1; transform:scale(1.25); }
+    }
     .intro-desc {
-      position:absolute; left:50%; bottom:9vh;
+      position:absolute; left:50%; bottom:23vh;
       width:90%; max-width:520px;
       font-size: 1.4rem; color: #555; line-height: 2.2; text-align: center;
+      text-shadow: 0 0 10px rgba(255,255,255,0.9), 0 0 10px rgba(255,255,255,0.9);
       opacity: 0; transform: translate(-50%,16px);
-      animation: descFadeInOut 2.6s ease 0.5s forwards;
+      animation: descFadeIn 0.9s ease 0.5s forwards;
     }
-    @keyframes descFadeInOut {
-      0%   { opacity:0; transform:translate(-50%,16px); }
-      30%  { opacity:1; transform:translate(-50%,0); }
-      75%  { opacity:1; transform:translate(-50%,0); }
-      100% { opacity:0; transform:translate(-50%,-10px); }
-    }
+    @keyframes descFadeIn { to { opacity:1; transform:translate(-50%,0); } }
     .intro-wrap {
       position:absolute; left:50%; bottom:7vh; transform:translateX(-50%);
       display: flex; align-items: center; justify-content: center; gap: 1.2rem;
@@ -243,7 +247,7 @@
       #intro-overlay { gap:0.8rem; padding:1rem 0; }
       .intro-moon { width:120px; height:120px; }
       .intro-photos { width:94vw; height:38vh; max-height:340px; }
-      .intro-desc { font-size:1.1rem; line-height:1.8; bottom:11vh; }
+      .intro-desc { font-size:1.1rem; line-height:1.8; bottom:26vh; }
       .intro-wrap { bottom:8vh; }
       .intro-chara { width:80px; height:80px; }
       .intro-title { font-size:1.6rem; }
