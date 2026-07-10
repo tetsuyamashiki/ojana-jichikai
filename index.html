@@ -62,30 +62,37 @@
       100%   { opacity:0; transform:translate(-50%,-50%) scale(0.85); }
     }
     .intro-photos {
-      display:flex; gap:0.5rem;
-      width:min(85vw, 700px); height:44vh; max-height:460px;
-      opacity:0; transform:scale(0.92);
-      animation: introPhotosIn 0.9s cubic-bezier(0.34,1.2,0.64,1) 2.6s forwards;
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:min(92vw, 820px); height:60vh; max-height:600px;
     }
     .intro-photo {
-      height: 100%; min-width: 0; width: 100%; object-fit: cover; display:block;
+      position:absolute; inset:0;
+      width:100%; height:100%; object-fit:contain; display:block;
+      opacity:0;
     }
-    .intro-photo:nth-child(1) { flex:1.3; object-position:50% 30%; }
-    .intro-photo:nth-child(2) { flex:2.3; object-position:50% 50%; }
-    .intro-photo:nth-child(3) { flex:1;   object-position:50% 25%; }
-    @keyframes introPhotosIn { to { opacity:1; transform:scale(1); } }
+    .intro-photo:nth-child(1) { animation: introPhotoFadeInOut 1.8s ease-in-out 2.6s forwards; }
+    .intro-photo:nth-child(2) { animation: introPhotoFadeInOut 1.8s ease-in-out 3.9s forwards; }
+    .intro-photo:nth-child(3) { animation: introPhotoFadeIn 1s ease 5.2s forwards; }
+    @keyframes introPhotoFadeInOut { 0% { opacity:0; } 20% { opacity:1; } 80% { opacity:1; } 100% { opacity:0; } }
+    @keyframes introPhotoFadeIn { to { opacity:1; } }
     .intro-desc {
+      position:absolute; left:50%; bottom:9vh;
+      width:90%; max-width:520px;
       font-size: 1.4rem; color: #555; line-height: 2.2; text-align: center;
-      opacity: 0; transform: translateY(16px);
+      opacity: 0; transform: translate(-50%,16px);
       animation: descFadeInOut 2.0s ease 0.6s forwards;
     }
     @keyframes descFadeInOut {
-      0%   { opacity:0; transform:translateY(16px); }
-      30%  { opacity:1; transform:translateY(0); }
-      75%  { opacity:1; transform:translateY(0); }
-      100% { opacity:0; transform:translateY(-10px); }
+      0%   { opacity:0; transform:translate(-50%,16px); }
+      30%  { opacity:1; transform:translate(-50%,0); }
+      75%  { opacity:1; transform:translate(-50%,0); }
+      100% { opacity:0; transform:translate(-50%,-10px); }
     }
-    .intro-wrap { display: flex; align-items: center; justify-content: center; gap: 1.2rem; }
+    .intro-wrap {
+      position:absolute; left:50%; bottom:7vh; transform:translateX(-50%);
+      display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+      width:max-content; max-width:90vw;
+    }
     .intro-chara {
       width: 140px; height: 140px; object-fit: contain;
       opacity: 0; transform: translateY(-30px) scale(0.85);
@@ -235,8 +242,9 @@
     @media (max-width:640px) {
       #intro-overlay { gap:0.8rem; padding:1rem 0; }
       .intro-moon { width:120px; height:120px; }
-      .intro-photos { width:92vw; height:26vh; max-height:280px; }
-      .intro-desc { font-size:1.1rem; line-height:1.8; padding:0 1rem; }
+      .intro-photos { width:94vw; height:38vh; max-height:340px; }
+      .intro-desc { font-size:1.1rem; line-height:1.8; bottom:11vh; }
+      .intro-wrap { bottom:8vh; }
       .intro-chara { width:80px; height:80px; }
       .intro-title { font-size:1.6rem; }
       nav { padding:0 0.8rem; height:auto; flex-wrap:wrap; gap:0.4rem; padding-top:0.5rem; padding-bottom:0.5rem; }
@@ -288,9 +296,9 @@
 <div id="intro-overlay">
   <img class="intro-moon" src="images/image3.png" alt="月"><!-- ここに巨大な画像データが入っていました -->
   <div class="intro-photos">
-    <img class="intro-photo" src="images/hero-boy.jpg" alt="祭りの様子1">
-    <img class="intro-photo" src="images/hero-shishimai.jpg" alt="祭りの様子2">
-    <img class="intro-photo" src="images/hero-seinenkai.jpg" alt="祭りの様子3">
+    <img class="intro-photo" src="images/intro-boy.jpg" alt="祭りの様子1">
+    <img class="intro-photo" src="images/intro-shishimai-full.jpg" alt="祭りの様子2">
+    <img class="intro-photo" src="images/intro-seinenkai-full.jpg" alt="祭りの様子3">
   </div>
   <p class="intro-desc">大謝名アイデンティティ、アップデート中…</p>
   <div class="intro-wrap">
@@ -543,7 +551,7 @@
   setTimeout(function() {
     var skipBtn = document.getElementById('skip-btn');
     if (skipBtn) skipBtn.style.display = 'none';
-  }, 5000);
+  }, 7000);
 
   // メールアドレス（Cloudflare対策）
   var m = 'oojyanajichi' + '@' + 'yahoo.co.jp';
@@ -560,7 +568,7 @@
     setTimeout(function() {
       overlay.style.display = 'none';
     }, 1000);
-  }, 5000);
+  }, 7000);
 
   // フェードイン
   var obs = new IntersectionObserver(function(entries) {
