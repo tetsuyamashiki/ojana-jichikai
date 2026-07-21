@@ -195,6 +195,49 @@
     .e-flyer img { max-width:260px; width:100%; border:1px solid #efefef; display:block; }
     .e-flyer-note { font-size:0.7rem; color:#aaa; margin-top:0.4rem; }
 
+    /* YUNTAKU（ジャナシシくんのユンタク） */
+    #yuntaku { background:#fffdf3; }
+    .yuntaku-head { text-align:center; }
+    .yuntaku-date { font-size:0.72rem; letter-spacing:0.15em; color:#b09000; margin-bottom:2.5rem; }
+    .yuntaku-stage {
+      display:grid; grid-template-columns:260px 1fr; gap:1.5rem; align-items:start;
+    }
+    /* キャラクター（季節ごとに差し替え） */
+    .yuntaku-chara {
+      width:260px; flex-shrink:0;
+      animation: yuntakuBob 3.6s ease-in-out infinite;
+      transform-origin:center bottom;
+    }
+    .yuntaku-chara img { width:100%; height:auto; display:block; border-radius:14px; }
+    .yuntaku-chara-name { text-align:center; font-family:"Noto Serif JP",serif; font-size:0.85rem; letter-spacing:0.08em; color:#555; margin-top:0.5rem; }
+    @keyframes yuntakuBob {
+      0%   { transform:translateY(0) rotate(-0.8deg); }
+      50%  { transform:translateY(-7px) rotate(0.8deg); }
+      100% { transform:translateY(0) rotate(-0.8deg); }
+    }
+    /* 吹き出し */
+    .yuntaku-bubble {
+      position:relative; background:#fff; border:2px solid #f5c800; border-radius:22px;
+      padding:1.6rem 1.8rem; box-shadow:0 6px 22px rgba(200,160,0,0.12);
+      opacity:0; transform:translateY(18px) scale(0.96);
+      transition:opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .yuntaku-bubble.pop { opacity:1; transform:translateY(0) scale(1); }
+    /* 吹き出しのしっぽ（キャラ側を指す） */
+    .yuntaku-bubble::before {
+      content:""; position:absolute; left:-18px; top:44px;
+      border-style:solid; border-width:11px 18px 11px 0;
+      border-color:transparent #f5c800 transparent transparent;
+    }
+    .yuntaku-bubble::after {
+      content:""; position:absolute; left:-14px; top:46px;
+      border-style:solid; border-width:9px 15px 9px 0;
+      border-color:transparent #fff transparent transparent;
+    }
+    .yuntaku-bubble p { font-size:1.12rem; line-height:2.1; color:#2a2a2a; margin-bottom:1rem; }
+    .yuntaku-bubble p:last-child { margin-bottom:0; }
+    .yuntaku-bubble .yuntaku-sign { text-align:right; font-family:"Noto Serif JP",serif; color:#b09000; font-size:1.05rem; margin-top:0.4rem; }
+
     /* DAYORI */
     #dayori { background:#f5c800; }
     .dayori-wrap { text-align:center; }
@@ -280,6 +323,22 @@
       .orgs-grid { grid-template-columns:repeat(2,1fr); }
       .event-row { grid-template-columns:70px 1fr; gap:1rem; }
       .life-row,.officer-row { grid-template-columns:1fr; gap:0.3rem; }
+
+      /* ユンタク：スマホは縦積み、しっぽを上向きに */
+      .yuntaku-stage { grid-template-columns:1fr; gap:1rem; justify-items:center; }
+      .yuntaku-chara { width:min(88%,300px); }
+      .yuntaku-bubble { width:100%; }
+      .yuntaku-bubble::before {
+        left:50%; top:-18px; transform:translateX(-50%);
+        border-width:0 13px 18px 13px;
+        border-color:transparent transparent #f5c800 transparent;
+      }
+      .yuntaku-bubble::after {
+        left:50%; top:-14px; transform:translateX(-50%);
+        border-width:0 10px 15px 10px;
+        border-color:transparent transparent #fff transparent;
+      }
+      .yuntaku-bubble p { font-size:1.05rem; line-height:2.0; }
     }
 
 
@@ -367,6 +426,33 @@
       <h1 class="home-title">大謝名区自治会</h1>
     </div>
     <p class="home-desc">大謝名アイデンティティ、アップデート中…</p>
+  </div>
+</section>
+
+<section id="yuntaku" class="fade-in">
+  <div class="inner">
+    <div class="yuntaku-head">
+      <p class="sec-en">Yuntaku</p>
+      <h2 class="sec-jp">ジャナシシくんのユンタク</h2>
+    </div>
+    <p class="yuntaku-date">2026年7月　vol.1</p>
+    <div class="yuntaku-stage">
+      <div class="yuntaku-chara">
+        <!-- ▼ 季節ごとに差し替え：images/yuntaku/ に「年-月.jpg」で保存し、下のsrcを差し替える ▼ -->
+        <img src="images/yuntaku/2026-07.jpg" alt="ジャナシシくん（2026年7月・ピクニックへ出発）">
+      </div>
+      <div class="yuntaku-bubble">
+        <p>暑いですね～、皆さん。でも、子どもは元気ですね～。公民館でも毎日元気な声が響いています。（セミに負けていませんよ～。）</p>
+        <p>おとなの方はというと、少々ばて気味です。私もそのうちの一人（一匹？）・・でも、自治会（公民館）は元気です！！行事も充実させ、ひとつひとつこなしています。</p>
+        <p>新しい取り組みとして、会員のみんなの日々の生活の一助になるようにホームページも始めました。自治会の行事や、生活情報などの情報を見ることができます。自治会だより、加入のお知らせ、自治会の中の組織の紹介などを発信しています。</p>
+        <p>インスタグラムや自治会ブログ（note）を覗くこともできます。</p>
+        <p>世の中が便利になり、発信先も紙媒体だけでなく、色々増えましたね。それらをうまく活用して、どんどん元気な自治会（公民館）にしていきたい。。</p>
+        <p>皆さんの思い描いている自治会（公民館）、やってみたい活動（やってほしい行事）などを、ホームページの「連絡先」の欄からどんどん送ってください。自治会だよりにのせてあるQRコード又は検索コードから「大謝名アイデンティティ」と入力して見ることができます。</p>
+        <p>会員でない方にも宣伝して広げてくださいね～。大謝名の元気なところを見てほしい、加入しようか迷っている人にもひとつのステップになるように。</p>
+        <p>今回は、長くなりましたが、これからも「ジャナシシくんのユンタク」をユタシクオニゲーサビラ。</p>
+        <p class="yuntaku-sign">— ジャナシシ</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -614,6 +700,20 @@
       });
     }, { threshold: 0.3 });
     dPages.forEach(function(el) { dObs.observe(el); });
+  }
+
+  // ユンタクの吹き出し ぴょこっと（キャラは常時ゆらゆら）
+  var yBubble = document.querySelector('.yuntaku-bubble');
+  if (yBubble) {
+    var yObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          setTimeout(function() { yBubble.classList.add('pop'); }, 200);
+          yObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    yObs.observe(yBubble);
   }
 
   // 組織背景キャラ ぴょこっと
