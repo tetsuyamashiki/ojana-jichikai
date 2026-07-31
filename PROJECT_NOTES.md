@@ -101,7 +101,9 @@
   幅1050pxにリサイズし`images/posters/akimatsuri-2026-09.jpg`として保存
 - 行事欄の「あきまつり（予告）」項目にポスター画像を追加(クリックで拡大、eiga-2026-08と同じe-flyerパターン)。
   詳細文に開催時間19:00〜21:00・会場（大謝名公民館広場）も明記
-- commit・push完了(コミット`efc12fb`)。Search Consoleでのインデックス登録リクエストは未実施
+- commit・push完了(コミット`efc12fb`)
+- Search Console(Claude in Chrome経由、ログインはユーザー)でトップページ
+  (`https://tetsuyamashiki.github.io/ojana-jichikai/`)のインデックス登録をリクエスト済み
 
 ### 2026-08-01(その2)
 - ユーザーから令和8年度4月号・5月号・6月号のPDF(Downloadsフォルダ)を受け取り、`dayori.html`バックナンバーに追加
