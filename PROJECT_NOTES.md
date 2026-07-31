@@ -105,8 +105,8 @@
     ラベル付きで1ページずつサムネイル表示する形に変更
   - `.gitignore` を新設(`.DS_Store`・`自治会だより他/`を除外)。誤って追跡されていた`images/.DS_Store`も
     `git rm --cached`で追跡解除
-  - 8/1(その1)で溜まっていた8月分の行事更新分と合わせてcommit・push実施
-  - push後、Search ConsoleでトップURL・dayori.htmlのインデックス登録をリクエストすること(未実施)
+  - 8/1(その1)で溜まっていた8月分の行事更新分と合わせてcommit・push実施済み(コミット`03aec16`)
+  - Search ConsoleでトップURL・dayori.htmlのインデックス登録をリクエストすること(未実施)
 
 ### 2026-08-01
 - Coworkモードで作業。自治会だより8月号(未完成版PDF)をもとに、`index.html`の行事・イベント欄を
