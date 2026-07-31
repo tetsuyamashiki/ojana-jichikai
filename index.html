@@ -191,6 +191,10 @@
     .e-day { font-family:"Noto Serif JP",serif; font-size:2.5rem; font-weight:300; line-height:1; color:#222; display:block; }
     .e-name { font-size:1rem; font-weight:500; letter-spacing:0.05em; margin-bottom:0.3rem; }
     .e-detail { font-size:0.8rem; color:#222; }
+    .month-divider { display:flex; align-items:center; gap:1rem; margin:0.8rem 0 0.2rem; }
+    .month-divider::before, .month-divider::after { content:''; flex:1; height:1px; background:#e8c800; }
+    .month-divider span { font-size:0.85rem; font-weight:500; letter-spacing:0.1em; color:#a67c00; white-space:nowrap; }
+    .event-row.month-start .e-month { font-size:0.85rem; font-weight:500; color:#a67c00; }
     .e-flyer { margin-top:1.2rem; cursor:pointer; display:inline-block; }
     .e-flyer img { max-width:260px; width:100%; border:1px solid #efefef; display:block; }
     .e-flyer-note { font-size:0.7rem; color:#aaa; margin-top:0.4rem; }
@@ -502,11 +506,12 @@
           </div>
         </div>
       </div>
-      <div class="event-row">
+      <div class="month-divider"><span>9月の予定</span></div>
+      <div class="event-row month-start">
         <div class="e-date"><span class="e-month">9月</span><span class="e-day">20</span></div>
         <div class="e-info">
           <p class="e-name">あきまつり（予告）</p>
-          <p class="e-detail">恒例のあきまつりを開催します。今回は協賛を募り、A0ポスターに協賛いただいた企業・個人のお名前を掲載します。<br>協賛はひと枠1万円。出演者も併せて募集中です。お申し込みは大謝名公民館へ直接お越しください。</p>
+          <p class="e-detail">9月20日（日）開催。恒例のあきまつりを開催します。今回は協賛を募り、A0ポスターに協賛いただいた企業・個人のお名前を掲載します。<br>協賛はひと枠1万円。出演者も併せて募集中です。お申し込みは大謝名公民館へ直接お越しください。</p>
         </div>
       </div>
 
