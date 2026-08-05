@@ -140,6 +140,19 @@
     .nav-links a { font-size:0.78rem; letter-spacing:0.08em; color:#333; transition:color 0.2s; }
     .nav-links a:hover { color:#111; }
 
+    /* 台風時のお知らせバナー（掲載期間中のみ表示） */
+    .typhoon-alert {
+      background: linear-gradient(90deg,#c40012,#ff3b30);
+      color:#fff; text-align:center; cursor:pointer;
+      padding: 76px 1rem 0.9rem;
+    }
+    .typhoon-alert-inner {
+      display:flex; align-items:center; justify-content:center; gap:0.6rem; flex-wrap:wrap;
+      max-width:800px; margin:0 auto;
+    }
+    .typhoon-alert-icon { font-size:1.2rem; }
+    .typhoon-alert-text { font-size:0.92rem; font-weight:700; letter-spacing:0.02em; text-decoration:underline; text-underline-offset:3px; }
+
     /* ===== SECTIONS ===== */
     section { padding: 100px 0 80px; }
     section + section { border-top: 1px solid #e8e8e8; }
@@ -322,6 +335,8 @@
       .nav-links { gap:0.5rem; flex-wrap:wrap; justify-content:flex-end; }
       .nav-links a { font-size:0.65rem; }
       #home { padding:110px 0 60px; }
+      .typhoon-alert { padding:96px 0.8rem 0.8rem; }
+      .typhoon-alert-text { font-size:0.78rem; }
       .home-title-wrap { flex-direction:column; gap:0.6rem; }
       .home-chara { width:70px; height:70px; }
       .home-title { font-size:clamp(1.5rem, 7vw, 2.1rem); white-space:nowrap; }
@@ -416,6 +431,16 @@
 <li><a href="#contact">連絡先</a></li>
   </ul>
 </nav>
+
+<!-- ▼▼ 台風時のお知らせバナー：台風期間のみ掲載。掲載終了時はこのブロックごと削除（またはコメントアウト）する ▼▼ -->
+<div class="typhoon-alert" onclick="openLightbox(event)">
+  <div class="typhoon-alert-inner">
+    <span class="typhoon-alert-icon">⚠️</span>
+    <span class="typhoon-alert-text">台風時のごみ収集について（タップして確認）</span>
+  </div>
+  <img src="images/posters/taihuu-gomi-shushu.jpg" alt="台風時のゴミ出し確認表（宜野湾市役所環境対策課）" hidden>
+</div>
+<!-- ▲▲ 台風時のお知らせバナー ここまで ▲▲ -->
 
 <!-- メインページ（常に表示・オーバーレイが上に乗るだけ） -->
 <section id="home">
