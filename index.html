@@ -140,6 +140,19 @@
     .nav-links a { font-size:0.78rem; letter-spacing:0.08em; color:#333; transition:color 0.2s; }
     .nav-links a:hover { color:#111; }
 
+    /* あきまつり協賛者様一覧のお知らせバナー（掲載期間中のみ表示） */
+    .akimatsuri-alert {
+      background: linear-gradient(90deg,#2d1b4e,#4b2e83);
+      color:#fff; text-align:center; cursor:pointer;
+      padding: 76px 1rem 0.9rem;
+    }
+    .akimatsuri-alert-inner {
+      display:flex; align-items:center; justify-content:center; gap:0.6rem; flex-wrap:wrap;
+      max-width:800px; margin:0 auto;
+    }
+    .akimatsuri-alert-icon { font-size:1.2rem; }
+    .akimatsuri-alert-text { font-size:0.92rem; font-weight:700; letter-spacing:0.02em; text-decoration:underline; text-underline-offset:3px; color:#f5c800; }
+
     /* ===== SECTIONS ===== */
     section { padding: 100px 0 80px; }
     section + section { border-top: 1px solid #e8e8e8; }
@@ -322,6 +335,8 @@
       .nav-links { gap:0.5rem; flex-wrap:wrap; justify-content:flex-end; }
       .nav-links a { font-size:0.65rem; }
       #home { padding:110px 0 60px; }
+      .akimatsuri-alert { padding:96px 0.8rem 0.8rem; }
+      .akimatsuri-alert-text { font-size:0.78rem; }
       .home-title-wrap { flex-direction:column; gap:0.6rem; }
       .home-chara { width:70px; height:70px; }
       .home-title { font-size:clamp(1.5rem, 7vw, 2.1rem); white-space:nowrap; }
@@ -417,6 +432,16 @@
   </ul>
 </nav>
 
+<!-- ▼▼ あきまつり協賛者様一覧のお知らせバナー：掲載期間のみ表示。掲載終了時はこのブロックごと削除（またはコメントアウト）する ▼▼ -->
+<div class="akimatsuri-alert" onclick="openLightbox(event)">
+  <div class="akimatsuri-alert-inner">
+    <span class="akimatsuri-alert-icon">🏮</span>
+    <span class="akimatsuri-alert-text">あきまつり2026 協賛者様一覧（タップして確認）</span>
+  </div>
+  <img src="images/posters/akimatsuri_kyousan-2026-09.jpg" alt="あきまつり2026 協賛者様一覧" hidden>
+</div>
+<!-- ▲▲ あきまつり協賛者様一覧のお知らせバナー ここまで ▲▲ -->
+
 <!-- メインページ（常に表示・オーバーレイが上に乗るだけ） -->
 <section id="home">
   <div class="home-photos">
@@ -504,7 +529,7 @@
           <p class="e-name">大謝名区あきまつり</p>
           <p class="e-detail">19:00〜21:00　大謝名公民館広場にて開催。舞台では獅子が舞い、子どもや老人も踊るなど楽しいプログラム、おいしいごちそうや出店もあります。公民館広場に全員集合！<br>※前日19日（土）午前9時より会場設営を行います。多くの会員の皆様のご協力をお願いします。</p>
           <div class="e-flyer" onclick="openLightbox(event)">
-            <img src="images/posters/akimatsuri-2026-09.jpg" alt="あきまつり2026 ポスター（9月20日・大謝名公民館広場）">
+            <img src="images/posters/akimatsuri_kyousan-2026-09.jpg" alt="あきまつり2026 ポスター（9月20日・大謝名公民館広場、協賛者様一覧）">
             <p class="e-flyer-note">↑ クリックで拡大</p>
           </div>
         </div>
