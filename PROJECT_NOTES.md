@@ -149,6 +149,12 @@
   インデックス登録リクエスト
 
 ### 2026-09-22
+- **(別サイト)E-Toneポートフォリオにも GA4 を導入**(自治会サイトの手順を踏襲)
+  - 対象: `../portfolio2/index.html`(リポジトリ tetsuyamashiki/e-tone、公開URL https://tetsuyamashiki.github.io/e-tone/ )
+  - 自治会と同じGAアカウント内に別プロパティを作成してもらい、**測定ID: `G-NML0GKB26H`**
+    (自治会の`G-BF2JES0Z0F`とは混ぜない)
+  - `<meta viewport>`直後に同形式の目印コメント付きタグを設置、フッターに`.footer-privacy`注記を追加
+  - プレビューで`G-NML0GKB26H`登録・`_ga`クッキー発行・コンソールエラーなしを確認。commit(`daa0bbb`)・push完了
 - あきまつり(9/20)終了に伴い、「あきまつり2026 協賛者様一覧」お知らせバナーを撤去
   - `index.html`から`.akimatsuri-alert`関連CSS(PC・スマホ両方)とnav直下のHTMLブロックを削除。
     バナー追加前の表示(nav直下にヒーロー)に復元したことをプレビューで確認
