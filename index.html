@@ -140,18 +140,6 @@
     .nav-links a { font-size:0.78rem; letter-spacing:0.08em; color:#333; transition:color 0.2s; }
     .nav-links a:hover { color:#111; }
 
-    /* あきまつり協賛者様一覧のお知らせバナー（掲載期間中のみ表示） */
-    .akimatsuri-alert {
-      background: linear-gradient(90deg,#2d1b4e,#4b2e83);
-      color:#fff; text-align:center; cursor:pointer;
-      padding: 76px 1rem 0.9rem;
-    }
-    .akimatsuri-alert-inner {
-      display:flex; align-items:center; justify-content:center; gap:0.6rem; flex-wrap:wrap;
-      max-width:800px; margin:0 auto;
-    }
-    .akimatsuri-alert-icon { font-size:1.2rem; }
-    .akimatsuri-alert-text { font-size:0.92rem; font-weight:700; letter-spacing:0.02em; text-decoration:underline; text-underline-offset:3px; color:#f5c800; }
 
     /* ===== SECTIONS ===== */
     section { padding: 100px 0 80px; }
@@ -335,8 +323,6 @@
       .nav-links { gap:0.5rem; flex-wrap:wrap; justify-content:flex-end; }
       .nav-links a { font-size:0.65rem; }
       #home { padding:110px 0 60px; }
-      .akimatsuri-alert { padding:96px 0.8rem 0.8rem; }
-      .akimatsuri-alert-text { font-size:0.78rem; }
       .home-title-wrap { flex-direction:column; gap:0.6rem; }
       .home-chara { width:70px; height:70px; }
       .home-title { font-size:clamp(1.5rem, 7vw, 2.1rem); white-space:nowrap; }
@@ -432,15 +418,6 @@
   </ul>
 </nav>
 
-<!-- ▼▼ あきまつり協賛者様一覧のお知らせバナー：掲載期間のみ表示。掲載終了時はこのブロックごと削除（またはコメントアウト）する ▼▼ -->
-<div class="akimatsuri-alert" onclick="openLightbox(event)">
-  <div class="akimatsuri-alert-inner">
-    <span class="akimatsuri-alert-icon">🏮</span>
-    <span class="akimatsuri-alert-text">あきまつり2026 協賛者様一覧（タップして確認）</span>
-  </div>
-  <img src="images/posters/akimatsuri_kyousan-2026-09.jpg" alt="あきまつり2026 協賛者様一覧" hidden>
-</div>
-<!-- ▲▲ あきまつり協賛者様一覧のお知らせバナー ここまで ▲▲ -->
 
 <!-- メインページ（常に表示・オーバーレイが上に乗るだけ） -->
 <section id="home">
@@ -465,20 +442,17 @@
       <p class="sec-en">Yuntaku</p>
       <h2 class="sec-jp">ジャナシシくんのユンタク</h2>
     </div>
-    <p class="yuntaku-date">2026年9月　vol.3</p>
+    <p class="yuntaku-date">2026年9月22日　vol.5</p>
     <div class="yuntaku-stage">
       <div class="yuntaku-chara">
-        <!-- ▼ 季節ごとに差し替え：images/yuntaku/ に「年-月.jpg」で保存し、下のsrcを差し替える ▼ -->
+        <!-- ▼ 更新のたびに差し替え：images/yuntaku/ に「年-月.jpg」で保存し、下のsrcと上の「◯年◯月◯日　vol.◯」を差し替える ▼ -->
         <img src="images/yuntaku/2026-09.jpg" alt="マイクを持って「スタート！！」と叫ぶジャナシシくん（2026年9月）">
       </div>
       <div class="yuntaku-bubble">
-        <p>今日初めて大謝名区のホームページをのぞいてくれたあなた！ありがとうございます。</p>
-        <p>このＨＰでは、自治会の活動や、みんなに紹介したい大謝名の素敵なところをＵＰしています。ぜひ登録してのぞきにきてください。</p>
-        <p>さて、今日は“あきまつり”（(^^)/！）初めての試みで協賛金のお願いもしました。大勢の方の応援がうれしい・・僕も獅子舞頑張ります！（ターニンマキララン）</p>
-        <p>僕と大謝名区自治会を応援してくれて、いっぺーかふーやいびーん。</p>
-        <p>楽しく集える公民館を目指して、自治会員も大募集中！！</p>
-        <p>みんなが応援してくれると、公民館が元気、僕も元気(^^)/</p>
-        <p>ユタシクオネゲーサビラ。。。</p>
+        <p>“あきまつり”が終わりました。</p>
+        <p>大いに盛り上がって、楽しかった。公民館広場が人、人で埋め尽くされこんなに大勢の人の前で獅子舞を舞うことができて、デージHappy！！でした。</p>
+        <p>ヤシガ、前日準備の時にも、沢山の人の協力が欲しい。。。（毎回思う）</p>
+        <p>来年は準備の段階から、あなたの協力を！ぜひぜひお願い。。そしてまつりをもっともっと盛り上げよう（ガッツ）</p>
         <p class="yuntaku-sign">— ジャナシシ</p>
       </div>
     </div>
